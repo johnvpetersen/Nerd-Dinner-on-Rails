@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:event_date] = "%B %d, %Y %I:%M %p"

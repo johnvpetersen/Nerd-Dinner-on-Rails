@@ -44,7 +44,7 @@ config.gem "geokit"
   # config.i18n.default_locale = :de
   
 
-Time::DATE_FORMATS[:event_date] = "%B %d, %Y %I:%M %p"
+
 
   
 end
