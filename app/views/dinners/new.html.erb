@@ -1,0 +1,114 @@
+<link type="text/css" href="/stylesheets/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/javascripts/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery-ui-1.7.2.custom.min.js"></script>
+<script type="text/javascript" src="/javascripts/timepicker.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.maskedinput-1.2.2.js"></script>
+
+<h2>Host a Dinner</h2>
+<% form_for(@dinner) do |f| %>
+  <%= f.error_messages %>
+
+<fieldset>
+<div id="dinnerDiv">
+<p>
+<%= f.label :Title, "Dinner Title:" %>
+<%= f.text_field :Title %>
+</p>
+
+<p>
+<%= f.label :Formatted_Eventdate, "Event Date:" %>
+<%= f.text_field :Formatted_Eventdate%>
+</p>
+
+<p>
+<%= f.label :Description, "Description:" %>
+<%= f.text_area :Description, :size => "20x2" %>
+</p>
+
+<p>
+<%= f.hidden_field :Hostedby, :value => current_user.login  %>
+</p>
+
+<p>
+<%= f.label :Address,"Address:" %><br />
+<%= f.text_field :Address %>
+</p>
+
+<p>
+<%= f.label :Country, "Country:" %><br />
+<%= f.text_field :Country %>
+</p>
+
+<p>
+<%= f.label :Contactphone, "Contact Phone #:" %><br />
+<%= f.text_field :Contactphone %>
+</p>
+  <p>
+    <%= f.hidden_field :Latitude %>
+  </p>
+  <p>
+    <%= f.hidden_field :Longitude %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+
+
+
+</div>
+
+<div id="mapDiv"> 
+   <div id="theMap" style="width:520px; z-index:0;">
+   
+   </div>
+</div>
+
+</fieldset>
+
+<script type="text/javascript">
+   
+     var $j = jQuery.noConflict();
+   
+    $j(document).ready(function() {
+    $j('#dinner_Formatted_Eventdate').datepicker({
+    	duration: '',
+        showTime: true,
+        constrainInput: false
+});
+
+    $j(document).ready(function() {
+        $j('#dinner_Contactphone').mask("999-999-9999");
+    });
+
+    $j(document).ready(function() {
+        $j('#main').css({height:"90%"})
+    });
+
+$("#dinner_Address").blur(function(evt) {
+                //If it's time to look for an address, 
+                // clear out the Lat and Lon
+                $("#dinner_Latitude").val("");
+                $("#dinner_Longitude").val("");
+
+                var address = jQuery.trim($("#dinner_Address").val());
+                if (address.length < 1)
+                    return;
+
+                FindAddressOnMap(address);
+                
+            });
+
+        var latitude = $("#dinner_Latitude").val();
+        var longitude =  $("#dinner_Longitude").val();
+                                
+        if ((latitude == 0) || (longitude == 0))
+            LoadMap();
+        else
+            LoadMap(latitude, longitude, mapLoaded);
+});
+
+
+      
+</script>
+
+<% end %>

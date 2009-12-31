@@ -1,0 +1,24 @@
+<h1>Listing rsvps</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Attendeename</th>
+    <th>Dinner</th>
+  </tr>
+
+<% @rsvps.each do |rsvp| %>
+  <tr>
+    <td><%=h rsvp.id %></td>
+    <td><%=h rsvp.Attendeename %></td>
+    <td><%=h rsvp.Dinner %></td>
+    <td><%= link_to 'Show', rsvp %></td>
+    <td><%= link_to 'Edit', edit_rsvp_path(rsvp) %></td>
+    <td><%= link_to 'Destroy', rsvp, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New rsvp', new_rsvp_path %>

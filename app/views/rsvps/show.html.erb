@@ -1,0 +1,18 @@
+<p>
+  <b>Id:</b>
+  <%=h @rsvp.id %>
+</p>
+
+<p>
+  <b>Attendeename:</b>
+  <%=h @rsvp.Attendeename %>
+</p>
+
+<p>
+  <b>Dinner:</b>
+  <%=h @rsvp.Dinner %>
+</p>
+
+
+<%= link_to 'Edit', edit_rsvp_path(@rsvp) %> |
+<%= link_to 'Back', rsvps_path %>

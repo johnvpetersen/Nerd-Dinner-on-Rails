@@ -1,0 +1,93 @@
+
+
+<div id="dinnerDiv">
+<h2><%=h @dinner.Title %></h2>
+
+
+<p><strong>When:</strong>  <%=h @dinner.Formatted_Eventdate%></p>
+<p><strong>Where:</strong> <%=h @dinner.Address %>, <%=h @dinner.Country %></p>
+<p><strong>Description:</strong> <%=h @dinner.Description %></p>
+<p><strong>Organizer:</strong>  <%=h @dinner.Hostedby %> (<%=h @dinner.Contactphone %>)</p>
+
+<input type="hidden" id="dinner_Latitude" value = "<%=h @dinner.Latitude %>" />
+<input type="hidden" id="dinner_Longitude" value = "<%=h @dinner.Longitude %>" />
+
+
+
+<div id="rsvpmsg">
+  <%if @dinner.IsHostedBy(current_user.login, @dinner.id) == nil%>
+   <%if @dinner.IsUserRegistered(current_user.login, @dinner.id) == nil%>
+      <%= link_to_remote( "RSVP to this dinner",  :update => "rsvpmsg",  :url =>{ :action => :rsvp, :id => @dinner.id, :user => current_user.login}) %> 
+   <%end%>
+<%end%>
+</div>
+
+<div id="rsvp_host_status">
+<strong>
+  <%if @dinner.IsHostedBy(current_user.login, @dinner.id) != nil%>
+      <p>You are hosting this dinner!</p>
+    <%else%>
+       <%if @dinner.IsUserRegistered(current_user.login, @dinner.id) != nil%>
+          <p>You have already RSVP'd to this dinner!</p>
+       <%end%>
+   <%end%>
+</strong>
+</div>
+
+<%if @dinner.Rsvp.count > 0%>
+<br/>
+<div id="attendees">
+<strong>Attendees:</strong>
+<ul>
+<%@dinner.Rsvp.each do |rsvp| %>
+<li>
+<%if rsvp.Attendeename == current_user.login%>
+<span style="color: red">You</span>
+<%else%>
+<%=h rsvp.Attendeename%>
+<%end%>
+</li>
+<%end%>
+</ul>
+</div>
+<%end%>
+
+
+
+<%if current_user.login == @dinner.Hostedby %>
+   <%= link_to 'Edit Dinner', edit_dinner_path(@dinner) %>
+   <%= link_to 'Delete Dinner', @dinner, :confirm => 'Are you sure?', :method => :delete %>
+<%end%>
+</div>
+
+<div id="mapDiv">
+   <div id="theMap" style="width:520px; z-index:0;">
+   </div>
+ </div>   
+
+<script type="text/javascript">
+
+  var $j = jQuery.noConflict();
+
+
+$j(document).ready(function() {
+
+        var latitude = $j("#dinner_Latitude").val();
+        var longitude =  $j("#dinner_Longitude").val();
+        
+        if ((latitude == 0) || (longitude == 0))
+            LoadMap();
+        else
+            LoadMap(latitude, longitude, mapLoaded);
+              });
+
+function mapLoaded() {
+        var title = "<%= @dinner.Title %>";
+        var address = "<%=h @dinner.Address %>";
+    
+        LoadPin(center, title, address);
+        map.SetZoomLevel(14);
+    } 
+
+
+</script>

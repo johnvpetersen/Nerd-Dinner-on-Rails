@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 
+  Title: MyString
+  Eventdate: 2009-12-19 16:52:39
+  Description: MyString
+  Hostedby: MyString
+  Contactphone: MyString
+  Address: MyString
+  Country: MyString
+  Latitude: MyString
+  Longitude: MyString
+
+two:
+  id: 
+  Title: MyString
+  Eventdate: 2009-12-19 16:52:39
+  Description: MyString
+  Hostedby: MyString
+  Contactphone: MyString
+  Address: MyString
+  Country: MyString
+  Latitude: MyString
+  Longitude: MyString
