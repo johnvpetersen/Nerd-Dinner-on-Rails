@@ -1,61 +1,49 @@
- <h2>What is NerdDinner on Rails?</h2>
-<p>
-	 <p>
-	 This project was inspired by the good works of Scott Guthrie, Scott Hanselman, Phil Haack , Rob Conery and the other members of the Microsoft <a href="http://www.asp.net/mvc/"> ASP MVC </a> team . 
-	 Nerd Dinner was invaluable to me as a vehicle for learning the ASP MVC Framework. Up to this point, I had used Nerd Dinner as a learning tool for other libaries such as 
-	 StructureMap, NHibernate and Fluent NHibernate. Often, I heard the refrain that ASP MVC was inspired by Rails. It seemed to me that Nerd Dinner would be an excellent
-	 vehicle for learning Rails. In this version of Nerd Dinner, I have strived to faithfully replicate the core features as well as features provided by JQuery, Ajax and Json. At their
-	 respective core levels, the ASP MVC and Rails versions of Nerd Dinner are identical in that they are comprised of Models, Views and Controllers.
-	 </p>
-	  In the Rails version, I added some additional features:
-	  
-	  <ul>
-	  <li> Ability to specify a mileage threshold when looking for dinners</li>
-	  <li> In the dinner search results, the mileage from the search orgin is displayed</li>
-          <li> Used JQuery to force an input mask on phone numbers</li> 	
-	</ul>
-	 <br/>
-	 <center><strong><i>Ruby is to Rails as C# is to .NET</i></strong></center>
-	 <br/>
-	 
-	 In the Ruby world, extensibility is achieved via Gems. To get started, you need Ruby, Ruby Gems and Rails. A great place to get started is <a href="http://rubyonrails.org/download" >here.</a>
-	 <br/>
-	 
-	 In addition to the the core Ruby/Rails environment, I implemented the following Gem Plugin's:
-	 <ul>
-	 <li><a href="http://github.com/technoweenie/restful-authentication"> Restful Authentication Gem</a></il>
-	 <li><a href="http://github.com/andre/geokit-rails/tree/master"> Geokit Gem</a></li>
-	 </ul>
-	 
-	 The Restful Authentication Gem, as the name implies, adds authentication to your Rails Project. Like the original Nerd Dinner, you need to login in order to RSVP and/or host a dinner. 
-	 Like Nerd Dinner as well, you can create create a user account.
-	 
-	 <p>
-	 Once you have Ruby and Rails installed, along with the gems, you should be good to rock and roll. To crank up the server, from the prompt: ruby script\server.
-	 </p>
-	 
-	 <p>
-	 fyi... Ruby v. 1.8.6 and Rails v. 2.3.4 was used in the development of this project.
-	 </p>
-	 
-	 <p>
-	 To handle the geo coding and distance calculation aspects of Nerd Dinner, I selected the Geokit Gem. In the orignal Nerd Dinner, a SQL Server stored proc was used to calculate 
-	 the distance between two lat/long coordinates. In order to keep this project as generic as possible, I opted to use <a href="http://www.sqlite.org/"> SQLite</a>. 
-	 SQLite is Rails default database adapter. The same map.js file that is used by the orignal Nerd Dinner is used in the Rails' version with one exception. In order to support Ajax 
-	 calls, Rails' default resource is a file called prototype.js. There are known incompatibilities between JQuery and Prototype. Fortunately, JQuery provides a noconflict method
-	 that allows us to specify a different variable to reference JQuery - leaving the default $ for prototype. For this app, I used $j to reference JQuery. Once the conflict was 
-	 resolved, the same map used in the original Nerd Dinner became available in the Rails version. Json is also natively supported in Rails. Like the original Nerd Dinner, Json is 
-	 used to supply data to the map.js javascript library so that dinner address details could be injected into the map points (illustrated as pins on the map). 
-	 
-	 As for queries and data access - Rails provides it via ActiveRecord. In case you were wondering, for lack of a better term, LINQ is already built in. Data access is relegated to its
-	 proper place as a commodity operation :). 
-	 </p>
-	 
-	 <p>
-	 I could go on and on...but that would spoil the fun! I'll leave it to you to you to explore, to compare and contrast the versions. The goal here was to learn. And indeed, it has been
-	 a great learning experience. The most important lesson learned by me? The realization that there is much more to learn and that the journey has just begun!  
-	 At this point, Ruby and Rails are not strangers to me. Were still in the getting acquanted stage, feeling more comfortable with each passing day. 
-	 And with this contribution, I hope they won't be strangers to you either. I hope you find this project useful in your own Rails Journey!
-	 </p>
-	 
-	 <a href="http://www.johnvpetersen.com"> < JVP ></a>
+What is NerdDinner on Rails (RailsDinner)?
+
+This project was inspired by the good works of Scott Guthrie, Scott Hanselman, Phil Haack , Rob Conery and the other members of the Microsoft ASP MVC Team: http://www.asp.net/mvc.
+Nerd Dinner was invaluable to me as a vehicle for learning the ASP MVC Framework. Up to this point, I had used Nerd Dinner as a learning tool for other libaries such as 
+StructureMap, NHibernate and Fluent NHibernate. Often, I heard the refrain that ASP MVC was inspired by Rails. It seemed to me that Nerd Dinner would be an excellent
+vehicle for learning Rails. In this version of Nerd Dinner, I have strived to faithfully replicate the core features as well as features provided by JQuery, Ajax and Json. At their
+respective core levels, the ASP MVC and Rails versions of Nerd Dinner are identical in that they are comprised of Models, Views and Controllers.
+
+In the Rails version, I added some additional features:
+
+Ability to specify a mileage threshold when looking for dinners
+In the dinner search results, the mileage from the search orgin is displayed
+Used JQuery to force an input mask on phone numbers
+
+Ruby is to Rails as C# is to .NET
+
+In the Ruby world, extensibility is achieved via Gems. To get started, you need Ruby, Ruby Gems and Rails. A great place to get started is: http://rubyonrails.org/download.
+
+In addition to the the core Ruby/Rails environment, I implemented the following Gem Plugin's:
+
+http://github.com/technoweenie/restful-authentication (Restful Authentication)
+http://github.com/andre/geokit-rails/tree/master (Geokit Gem)
+
+The Restful Authentication Gem, as the name implies, adds authentication to your Rails Project. Like the original Nerd Dinner, you need to login in order to RSVP and/or host a dinner. 
+Like Nerd Dinner as well, you can create create a user account.
+
+Once you have Ruby and Rails installed, along with the gems, you should be good to rock and roll. To crank up the server, from the prompt: ruby script\server.
+
+fyi... Ruby v. 1.8.6 and Rails v. 2.3.4 was used in the development of this project.
+
+To handle the geo coding and distance calculation aspects of Nerd Dinner, I selected the Geokit Gem. In the orignal Nerd Dinner, a SQL Server stored proc was used to calculate 
+the distance between two lat/long coordinates. In order to keep this project as generic as possible, I opted to use SQLite:  http://www.sqlite.org/. 
+SQLite is Rails default database adapter. The same map.js file that is used by the orignal Nerd Dinner is used in the Rails' version with one exception. In order to support Ajax 
+calls, Rails' default resource is a file called prototype.js. There are known incompatibilities between JQuery and Prototype. Fortunately, JQuery provides a noconflict method
+that allows us to specify a different variable to reference JQuery - leaving the default $ for prototype. For this app, I used $j to reference JQuery. Once the conflict was 
+resolved, the same map used in the original Nerd Dinner became available in the Rails version. Json is also natively supported in Rails. Like the original Nerd Dinner, Json is 
+used to supply data to the map.js javascript library so that dinner address details could be injected into the map points (illustrated as pins on the map). 
+
+As for queries and data access - Rails provides it via ActiveRecord. In case you were wondering, for lack of a better term, LINQ is already built in. Data access is relegated to its
+proper place as a commodity operation :). 
+
+I could go on and on...but that would spoil the fun! I'll leave it to you to you to explore, to compare and contrast the versions. The goal here was to learn. And indeed, it has been
+a great learning experience. The most important lesson learned by me? The realization that there is much more to learn and that the journey has just begun!  
+At this point, Ruby and Rails are not strangers to me. Were still in the getting acquanted stage, feeling more comfortable with each passing day. 
+And with this contribution, I hope they won't be strangers to you either. I hope you find this project useful in your own Rails Journey!
+
+< JVP >
+http://www.johnvpetersen.com
+@johnvpetersen
