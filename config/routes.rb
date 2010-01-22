@@ -12,6 +12,7 @@ map.resources :about
   map.create '/create' ,:controller=> 'dinners', :action =>'new'
   map.home '/home', :controller=> 'home', :action => 'index'
   map.about '/about', :controller=> 'about', :action => 'index'
+  
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'

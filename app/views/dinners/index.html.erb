@@ -1,8 +1,8 @@
 <h2>Upcoming Dinners</h2>
 
-<% if flash[:notice] %>
-      <div class="notice"><%= flash[:notice] %></div>
-    <% end %>
+<%if @dinners.length == 0 %>
+   <%= link_to("There are no upcoming dinners", {:action => "new"}) %>
+<%end%>
 
 <ul>
 <% @dinners.each do |dinner| %>

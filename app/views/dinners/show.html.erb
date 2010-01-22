@@ -1,23 +1,25 @@
-
-
 <div id="dinnerDiv">
 <h2><%=h @dinner.Title %></h2>
 
-
-<p><strong>When:</strong>  <%=h @dinner.Formatted_Eventdate%></p>
-<p><strong>Where:</strong> <%=h @dinner.Address %>, <%=h @dinner.Country %></p>
+<p><strong>When:</strong>  
+<%=h @dinner.Formatted_Eventdate%></p>
+<p><strong>Where:</strong> 
+<%=h @dinner.Address %>, <%=h @dinner.Country %></p>
 <p><strong>Description:</strong> <%=h @dinner.Description %></p>
-<p><strong>Organizer:</strong>  <%=h @dinner.Hostedby %> (<%=h @dinner.Contactphone %>)</p>
+<p><strong>Organizer:</strong>  
+<%=h @dinner.Hostedby %> (<%=h @dinner.Contactphone %>)</p>
 
-<input type="hidden" id="dinner_Latitude" value = "<%=h @dinner.Latitude %>" />
-<input type="hidden" id="dinner_Longitude" value = "<%=h @dinner.Longitude %>" />
-
-
+<input type="hidden" id="dinner_Latitude" 
+   value = "<%=h @dinner.Latitude %>" />
+<input type="hidden" id="dinner_Longitude" 
+   value = "<%=h @dinner.Longitude %>" />
 
 <div id="rsvpmsg">
   <%if @dinner.IsHostedBy(current_user.login, @dinner.id) == nil%>
    <%if @dinner.IsUserRegistered(current_user.login, @dinner.id) == nil%>
-      <%= link_to_remote( "RSVP to this dinner",  :update => "rsvpmsg",  :url =>{ :action => :rsvp, :id => @dinner.id, :user => current_user.login}) %> 
+      <%= link_to_remote( "RSVP to this dinner",  :update => "rsvpmsg", 
+          :url =>{ :action => :rsvp, 
+	  :id => @dinner.id, :user => current_user.login},:success => "AnimateRSVPMessage()") %> 
    <%end%>
 <%end%>
 </div>
@@ -52,12 +54,12 @@
 </div>
 <%end%>
 
-
-
 <%if current_user.login == @dinner.Hostedby %>
    <%= link_to 'Edit Dinner', edit_dinner_path(@dinner) %>
-   <%= link_to 'Delete Dinner', @dinner, :confirm => 'Are you sure?', :method => :delete %>
-<%end%>
+   <%= link_to 'Delete Dinner', 
+       @dinner, :confirm => 'Are you sure?', 
+          :method => :delete %>
+    <%end%>
 </div>
 
 <div id="mapDiv">
@@ -67,12 +69,16 @@
 
 <script type="text/javascript">
 
-  var $j = jQuery.noConflict();
+var $j = jQuery.noConflict();
+
+   function AnimateRSVPMessage() {
+      $j("#rsvpmsg").animate({ fontSize: "1.5em" }, 400);
+   }
 
 
 $j(document).ready(function() {
 
-        var latitude = $j("#dinner_Latitude").val();
+var latitude = $j("#dinner_Latitude").val();
         var longitude =  $j("#dinner_Longitude").val();
         
         if ((latitude == 0) || (longitude == 0))
@@ -88,6 +94,5 @@ function mapLoaded() {
         LoadPin(center, title, address);
         map.SetZoomLevel(14);
     } 
-
-
+    
 </script>

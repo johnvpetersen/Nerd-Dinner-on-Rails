@@ -103,7 +103,8 @@ function FindDinnersGivenLocation(where) {
        null, null, callbackUpdateMapDinners);
 }
 
-function callbackUpdateMapDinners(layer, resultsArray, places, hasMore, VEErrorMessage) {
+function callbackUpdateMapDinners(layer, resultsArray, places, hasMore, VEErrorMessage) 
+{
     $j("#dinnerList").empty();
     clearMap();
     var center = map.GetCenter();
@@ -119,42 +120,58 @@ function callbackUpdateMapDinners(layer, resultsArray, places, hasMore, VEErrorM
 	                                 distance: $j("#Distance").val()
     }, function(dinners) {
 	    
-	    $j.each(dinners, function(i, dinner) {
+	    $j.each(dinners, function(i, dinner) 
+	    
+	       {
+               
 
-		
-            var LL = new VELatLong(dinner.Latitude, dinner.Longitude, 0, null);
-		    
-            var RsvpMessage = "";
 
-            if (dinner.RSVPCount == 1)
-                RsvpMessage = "" + dinner.RSVPCount + " RSVP";
-            else
-                RsvpMessage = "" + dinner.RSVPCount + " RSVPs";
+                //Add a dinner to the <ul> dinnerList on the right
+               
+		if (dinner.DinnerID > 0) {	
+                 var LL = new VELatLong(dinner.Latitude, dinner.Longitude, 0, null);
+                 var RsvpMessage = "";
+                  if (dinner.RSVPCount == 1)
+                   RsvpMessage = "" + dinner.RSVPCount + " RSVP";
+                 else
+                   RsvpMessage = "" + dinner.RSVPCount + " RSVPs";
 
-            // Add Pin to Map
-            LoadPin(LL, '<a href="/dinners/show/' + dinner.DinnerID + '">'
-                        + dinner.Title + '</a>',
-                        "<p>" + dinner.Description + "</p>" + RsvpMessage);
+                 // Add Pin to Map
+                LoadPin(LL, '<a href="/dinners/show/' + dinner.DinnerID + '">'
+                            + dinner.Title + '</a>',
+                           "<p>" + dinner.Description + "</p>" + RsvpMessage);
 
-            //Add a dinner to the <ul> dinnerList on the right
-            $j('#dinnerList').append($('<li/>')
-                            .attr("class", "dinnerItem")
-                            .append($('<a/>').attr("href", 
-                                      "/dinners/show/" + dinner.DinnerID)
-                            .html(dinner.Title)).append(" (" + RsvpMessage + " - (" + Math.round(dinner.Distance*Math.pow(10,2))/Math.pow(10,2) + " mi)"+")"));
-        });
+				$j('#dinnerList').append($('<li/>')
+                               .attr("class", "dinnerItem")
+                               .append($('<a/>').attr("href", 
+                                         "/dinners/show/" + dinner.DinnerID)
+                               .html(dinner.Title)).append(" (" + RsvpMessage + " - (" + Math.round(dinner.Distance*Math.pow(10,2))/Math.pow(10,2) + " mi)"+")"));
+			}
+			else
+			{
+		       $j('#dinnerList').append($('<li/>')
+                               .attr("class", "dinnerItem")
+                               .append($('<a/>').attr("href", 
+                                         "/create/")
+                               .html(dinner.Title)));
+				}
+				});
+	       
 
-        // Adjust zoom to display all the pins we just added.
-	    if (points.length > 1) {
-        	    map.SetMapView(points);
-	    }
+           // Adjust zoom to display all the pins we just added.
+	       if (points.length > 1) {
+        	       map.SetMapView(points);
+                     // Display the event's pin-bubble on hover.
+                    $j(".dinnerItem").each(function(i, dinner) {
+                        $(dinner).hover(
+                           function() { map.ShowInfoBox(shapes[i]); },
+                          function() { map.HideInfoBox(shapes[i]); }
+                         );
+                      });
+		}
 
-        // Display the event's pin-bubble on hover.
-        $j(".dinnerItem").each(function(i, dinner) {
-            $(dinner).hover(
-                function() { map.ShowInfoBox(shapes[i]); },
-                function() { map.HideInfoBox(shapes[i]); }
-            );
-        });
-    }, "json");
-}
+       
+	   }, "json");
+
+       
+       }

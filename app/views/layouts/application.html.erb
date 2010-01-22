@@ -6,42 +6,45 @@
 <%= javascript_include_tag "prototype" %>
 <%= stylesheet_link_tag 'Site' %>
 
-<script src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2" type="text/javascript"></script>
-<script src="/javascripts/jquery-1.2.6.min.js" type="text/javascript"></script>    
-<script src="/javascripts/Map.js" type="text/javascript"></script>    
-<script src="/javascripts/jquery-1.2.6.min.js" type="text/javascript"></script>    
-<script src="/javascripts/jquery-ui-1.7.2.custom.min.js" type="text/javascript" ></script>
+<script src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2" 
+   type="text/javascript">
+ </script>
+
+<script src="/javascripts/jquery-1.2.6.min.js" type="text/javascript">
+</script>    
+
+<script src="/javascripts/Map.js" type="text/javascript">
+</script>    
+
+<script src="/javascripts/jquery-1.2.6.min.js" type="text/javascript">
+</script>    
+
+<script src="/javascripts/jquery-ui-1.7.2.custom.min.js" type="text/javascript" >
+</script>
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 </head>
-
 <body>
 <div class="page">
         <div id="header">
             <div id="title">
                 <table>
-		<tr>
-		<td><h1>NerdDinner</h1></td>
-		<td><h1>On</h1></td>
-		<td><img src="/Images/rails.png" align="left" height="100" /></td>
-		</tr>
+	   	   <tr>
+		      <td><h1>NerdDinner</h1></td>
+		      <td><h1>On</h1></td>
+		      <td><img src="/Images/rails.png" align="left" height="100" /></td>
+		   </tr>
 		</table>
-		
-		
-		
-            </div>
-
+           </div>
             <div id="logindisplay">
-            <% if logged_in? %>
-              Welcome <strong><%=h current_user.login %></strong>!
-              
-              <%= link_to '[ Log Off ]', logout_path %>
+               <% if logged_in? %>
+                 Welcome <strong><%=h current_user.login %></strong>!
+                 <%= link_to '[ Log Off ]', logout_path %>
               <% else %>
                  <%= link_to '[ Log On ]', login_path %>
                <% end %>
             </div> 
-            
             <div id="menucontainer">
                 <ul id="menu">      
                    <li><%= link_to 'Find a Dinner', home_path %></li>
@@ -50,7 +53,6 @@
                 </ul>
             </div>
         </div>
-
         <div id="main">
            <%= yield %>
         </div>
